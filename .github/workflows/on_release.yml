@@ -15,6 +15,9 @@ on:
 
 jobs:
   once:
+    name: Upload licencse
+    runs-on: ubuntu-latest
+    steps:
     - name: upload
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
