@@ -1,0 +1,26 @@
+name: Upload binaries to release
+
+on:
+  release:
+    types:
+      - created
+      - published
+      - edited
+
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'release ID for uploading binaries'
+        required: false
+
+jobs:
+  once:
+    - name: upload
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: mchehab/upload_on_trigger@v1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: LICENSE
+        asset_name: LICENSE
+        asset_content_type: application/text
