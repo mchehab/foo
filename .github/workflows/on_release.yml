@@ -21,7 +21,7 @@ jobs:
     - name: upload
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      uses: mchehab/upload_on_trigger@v1
+      uses: mchehab/upload_on_trigger@v0.9
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: LICENSE
