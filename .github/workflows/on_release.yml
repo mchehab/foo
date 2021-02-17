@@ -22,5 +22,5 @@ jobs:
     - uses: actions/github-script@v3
       with:
         script: |
-          const script = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/upload.js`)
+          const script = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/upload_files.js`)
           console.log(script({github, context}))

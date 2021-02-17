@@ -1,3 +1,5 @@
+const core = require('@actions/core');
+
 var uploadUrl = core.getInput('upload_url', { required: false, default: ''});
 
 // Useful when manually triggered
@@ -21,7 +23,7 @@ if (uploadUrl === '') {
     uploadUrl = release.data.upload_url;
 }
 
-# It sounds that this needs to be hardcoded with this version
+// It sounds that this needs to be hardcoded with this version
 const asset_path = 'LICENSE';
 const asset_name = 'LICENSE';
 const asset_content_type = 'application/text';
@@ -41,7 +43,7 @@ const headers = { 'content-type': assetContentType, 'content-length': contentLen
 // Upload a release asset
 // API Documentation: https://developer.github.com/v3/repos/releases/#upload-a-release-asset
 // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-on-trigger
-const uploadAssetResponse = await github.repos.uploadReleaseAsset({
+const uploadAssetResponse = github.repos.uploadReleaseAsset({
     url: uploadUrl,
     headers,
     name: assetName,
