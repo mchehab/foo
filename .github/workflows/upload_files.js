@@ -21,9 +21,14 @@ if (uploadUrl === '') {
     uploadUrl = release.data.upload_url;
 }
 
-const assetPath = core.getInput('asset_path', { required: true });
-const assetName = core.getInput('asset_name', { required: true });
-const assetContentType = core.getInput('asset_content_type', { required: true });
+# It sounds that this needs to be hardcoded with this version
+const asset_path = 'LICENSE';
+const asset_name = 'LICENSE';
+const asset_content_type = 'application/text';
+
+//const assetPath = core.getInput('asset_path', { required: true });
+//const assetName = core.getInput('asset_name', { required: true });
+//const assetContentType = core.getInput('asset_content_type', { required: true });
 
 // Determine content-length for header to upload asset
 const contentLength = filePath => fs.statSync(filePath).size;
