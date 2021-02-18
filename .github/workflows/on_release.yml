@@ -15,12 +15,15 @@ on:
 
 jobs:
   once:
-    name: Upload license
+    name: Upload licencse
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/github-script@v3
+    - name: upload
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: mchehab/upload_on_trigger@v0.9
       with:
-        script: |
-          const script = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/upload_files.js`)
-          console.log(script({github, context}))
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: LICENSE
+        asset_name: LICENSE
+        asset_content_type: application/text
