@@ -9,21 +9,26 @@ on:
 
   workflow_dispatch:
     inputs:
-      release:
-        description: 'release ID for uploading binaries'
+      release_tag:
+        description: 'release tag'
         required: false
 
 jobs:
   once:
-    name: Upload licencse
+    name: Upload test
     runs-on: ubuntu-latest
     steps:
-    - name: upload
+    - uses: actions/checkout@v2
+    - run: |
+        echo ${{ github.event.release.upload_url }}
+        echo "foo" > FOO_FILE
+    - uses: mchehab/upload-release-asset@v1.0.3
+      name: upload
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      uses: mchehab/upload_on_trigger@v0.9
       with:
+        release_tag: ${{ github.event.workflow_dispatch.release_tag }}
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: LICENSE
-        asset_name: LICENSE
+        asset_path: ./FOO_FILE
+        asset_name: FOO_FILE
         asset_content_type: application/text
